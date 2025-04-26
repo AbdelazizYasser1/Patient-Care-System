@@ -1,61 +1,148 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+🏥 Medical Management System API
+📋 Overview
+Welcome to the Medical Management System API! This platform is designed to streamline healthcare communication between patients and doctors. It allows patients to submit medical queries, upload x-ray images, and access their health records, while doctors can provide expert responses, view patient medical histories, and analyze x-ray results. With robust user authentication and secure communication, this API is designed for an efficient healthcare experience. 🚀
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+⚙️ Features
+🩺 For Patients:
+Submit Medical Queries: Patients can ask questions about symptoms and medical conditions. 📝
 
-## About Laravel
+Upload X-Rays: Upload x-ray images for medical review by doctors. 📸
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+View Medical History: Patients can check their past medical treatments and surgeries. 📂
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Authentication: Secure login/logout functionality to protect personal information. 🔒
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+👩‍⚕️ For Doctors:
+Respond to Questions: Doctors can view patient queries and provide medical responses. 💬
 
-## Learning Laravel
+View X-Rays: Doctors can analyze x-ray images uploaded by patients. 🖼️
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Manage Medical Histories: Doctors can update patient medical records. 📋
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Authentication: Secure login/logout for doctors. 🔑
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+👨‍💻 For Admins:
+Manage Users: Admins can control both patient and doctor accounts. 👥
 
-## Laravel Sponsors
+Manage Medical Records: Admins can access and manage the medical histories of patients. 🗃️
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+🛠️ Database Schema
+1. Users Table 🧑‍⚕️👩‍⚕️
+Stores user details (patients and doctors).
 
-### Premium Partners
+id: Primary Key
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+full_name: User's full name
 
-## Contributing
+email: User's email address
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+phone: User's contact number
 
-## Code of Conduct
+usertype: Enum (patient, doctor)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+password: Encrypted password
 
-## Security Vulnerabilities
+created_at: Timestamp when the account was created
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+updated_at: Timestamp when the account was last updated
 
-## License
+2. Questions Table ❓
+Stores medical queries submitted by patients.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+id: Primary Key
+
+patient_id: Foreign Key (User)
+
+doctor_id: Foreign Key (User, Nullable)
+
+question_text: Text of the patient's question
+
+status: Enum (pending, answered)
+
+created_at: Timestamp when the question was submitted
+
+updated_at: Timestamp when the question was last updated
+
+3. Responses Table 💬
+Stores doctor responses to patient queries.
+
+id: Primary Key
+
+question_id: Foreign Key (Questions)
+
+doctor_id: Foreign Key (Users)
+
+response_text: Text of the doctor's response
+
+created_at: Timestamp when the response was created
+
+updated_at: Timestamp when the response was last updated
+
+4. X-Rays Table 🩻
+Stores x-ray images and their descriptions.
+
+id: Primary Key
+
+name_of_xray: Name of the x-ray type
+
+description_of_xray: Description of the x-ray
+
+result_of_xray: Interpretation of the x-ray results
+
+type_of_xray: Type of the x-ray (e.g., chest, limb)
+
+image_of_xray: Path to the stored x-ray image
+
+user_id: Foreign Key (Users)
+
+created_at: Timestamp when the x-ray was uploaded
+
+updated_at: Timestamp when the x-ray was last updated
+
+5. Medical Histories Table 🏥
+Stores the medical histories of patients, including past surgeries.
+
+id: Primary Key
+
+name_of_surgery: Name of the surgery
+
+description_of_surgery: Description of the surgery or treatment
+
+user_id: Foreign Key (Users)
+
+created_at: Timestamp when the history record was created
+
+updated_at: Timestamp when the record was last updated
+
+🖥️ API Endpoints
+Authentication Endpoints 🔐
+POST /api/login - Login a user and retrieve an authentication token.
+
+POST /api/register - Register a new user (patient or doctor).
+
+POST /api/logout - Logout the authenticated user.
+
+GET /api/profile - Get authenticated user's profile details.
+
+Patient Endpoints 🩺
+POST /api/questions - Submit a medical question to a doctor.
+
+GET /api/questions/{id} - View a specific question's details.
+
+POST /api/xrays - Upload a new x-ray image.
+
+GET /api/medical_histories_of_patient/{user_id} - Get the medical history for a patient.
+
+Doctor Endpoints 👨‍⚕️
+GET /api/questions/pending - View all pending patient queries.
+
+POST /api/questions/{id}/response - Respond to a specific patient query.
+
+GET /api/questions/{doctor_id}/{patient_id} - View all questions from a specific patient directed to a specific doctor.
+
+GET /api/xrays/{user_id} - View x-ray images uploaded by a specific patient.
+
+Admin Endpoints 👩‍💻
+GET /api/medical_histories_of_patient/{user_id} - Get medical history records of a specific patient.
+
+GET /api/unique_xray/{XRay_id} - View details of a specific x-ray by its ID.
