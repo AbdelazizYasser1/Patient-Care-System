@@ -1,11 +1,12 @@
-### hello
 
-###🏥 Medical Management System API
+### 🏥 Patient-Care-System API :
 📋 Overview
 Welcome to the Medical Management System API! This platform is designed to streamline healthcare communication between patients and doctors. It allows patients to submit medical queries, upload x-ray images, and access their health records, while doctors can provide expert responses, view patient medical histories, and analyze x-ray results. With robust user authentication and secure communication, this API is designed for an efficient healthcare experience. 🚀
 
-###⚙️ Features
-🩺 For Patients:
+--- 
+
+### ⚙️ Features:
+### 🩺 For Patients:
 Submit Medical Queries: Patients can ask questions about symptoms and medical conditions. 📝
 
 Upload X-Rays: Upload x-ray images for medical review by doctors. 📸
@@ -14,7 +15,7 @@ View Medical History: Patients can check their past medical treatments and surge
 
 Authentication: Secure login/logout functionality to protect personal information. 🔒
 
-👩‍⚕️ For Doctors:
+### 👩‍⚕️ For Doctors:
 Respond to Questions: Doctors can view patient queries and provide medical responses. 💬
 
 View X-Rays: Doctors can analyze x-ray images uploaded by patients. 🖼️
@@ -23,13 +24,15 @@ Manage Medical Histories: Doctors can update patient medical records. 📋
 
 Authentication: Secure login/logout for doctors. 🔑
 
-👨‍💻 For Admins:
+### 👨‍💻 For Admins:
 Manage Users: Admins can control both patient and doctor accounts. 👥
 
 Manage Medical Records: Admins can access and manage the medical histories of patients. 🗃️
 
-🛠️ Database Schema
-1. Users Table 🧑‍⚕️👩‍⚕️
+--- 
+
+### 🛠️ Database Schema :
+### 1. Users Table 🧑‍⚕️👩‍⚕️
 Stores user details (patients and doctors).
 
 id: Primary Key
@@ -48,7 +51,7 @@ created_at: Timestamp when the account was created
 
 updated_at: Timestamp when the account was last updated
 
-2. Questions Table ❓
+### 2. Questions Table ❓
 Stores medical queries submitted by patients.
 
 id: Primary Key
@@ -65,7 +68,7 @@ created_at: Timestamp when the question was submitted
 
 updated_at: Timestamp when the question was last updated
 
-3. Responses Table 💬
+### 3. Responses Table 💬
 Stores doctor responses to patient queries.
 
 id: Primary Key
@@ -80,7 +83,7 @@ created_at: Timestamp when the response was created
 
 updated_at: Timestamp when the response was last updated
 
-4. X-Rays Table 🩻
+### 4. X-Rays Table 🩻
 Stores x-ray images and their descriptions.
 
 id: Primary Key
@@ -101,7 +104,7 @@ created_at: Timestamp when the x-ray was uploaded
 
 updated_at: Timestamp when the x-ray was last updated
 
-5. Medical Histories Table 🏥
+### 5. Medical Histories Table 🏥
 Stores the medical histories of patients, including past surgeries.
 
 id: Primary Key
@@ -116,8 +119,10 @@ created_at: Timestamp when the history record was created
 
 updated_at: Timestamp when the record was last updated
 
-🖥️ API Endpoints
-Authentication Endpoints 🔐
+---
+
+### 🖥️ API Endpoints : 
+### Authentication Endpoints 🔐
 POST /api/login - Login a user and retrieve an authentication token.
 
 POST /api/register - Register a new user (patient or doctor).
@@ -126,7 +131,7 @@ POST /api/logout - Logout the authenticated user.
 
 GET /api/profile - Get authenticated user's profile details.
 
-Patient Endpoints 🩺
+### Patient Endpoints 🩺
 POST /api/questions - Submit a medical question to a doctor.
 
 GET /api/questions/{id} - View a specific question's details.
@@ -135,7 +140,7 @@ POST /api/xrays - Upload a new x-ray image.
 
 GET /api/medical_histories_of_patient/{user_id} - Get the medical history for a patient.
 
-Doctor Endpoints 👨‍⚕️
+### Doctor Endpoints 👨‍⚕️
 GET /api/questions/pending - View all pending patient queries.
 
 POST /api/questions/{id}/response - Respond to a specific patient query.
@@ -144,7 +149,58 @@ GET /api/questions/{doctor_id}/{patient_id} - View all questions from a specific
 
 GET /api/xrays/{user_id} - View x-ray images uploaded by a specific patient.
 
-Admin Endpoints 👩‍💻
+### Admin Endpoints 👩‍💻
 GET /api/medical_histories_of_patient/{user_id} - Get medical history records of a specific patient.
 
 GET /api/unique_xray/{XRay_id} - View details of a specific x-ray by its ID.
+
+---
+
+### 🛠️ Installation and Setup : 
+Prerequisites 📋
+PHP 8.2+
+
+Laravel 12
+
+Composer
+
+MySQL Database
+
+---
+
+### Steps to Install 🚀
+Clone the repository:
+
+git clone https://github.com/your-repo/medical-management-system.git
+cd medical-management-system
+Install dependencies:
+
+---
+
+composer install
+Configure the environment:
+
+---
+
+cp .env.example .env
+Update .env file with your database credentials:
+
+---
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=medical_management
+DB_USERNAME=root
+DB_PASSWORD=
+Run migrations and seeders:
+
+---
+
+php artisan migrate --seed
+Start the development server:
+
+---
+
+php artisan serve
+The API will be running at http://127.0.0.1:8000.
